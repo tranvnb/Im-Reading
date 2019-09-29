@@ -3,18 +3,14 @@
     "description": "Store and Restore halfway reading tabs",
     "version": 0.1,
     "manifest_version": 2,
-    "icons": {
-        "48": "icons/icon_48.png",
-        "128": "icons/icon_128.png"
-    },
     "browser_action": {
-        "default_title": "new-tab-page",
+        "default_title": "I'm Reading",
         "default_popup": "popup/popup.html",
         "default_icon": {
-            "16": "images/get_started16.png",
-            "32": "images/get_started32.png",
-            "48": "images/get_started48.png",
-            "128": "images/get_started128.png"
+            "16": "assets/icons/get_started16.png",
+            "32": "assets/icons/get_started32.png",
+            "48": "assets/icons/get_started48.png",
+            "128": "assets/icons/get_started128.png"
         }
     },
     "background": {
@@ -22,10 +18,8 @@
             "background.js"
         ]
     },
-    "chrome_url_overrides": {
-        "newtab": "tab/tab.html"
-    },
     "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ]
 }
