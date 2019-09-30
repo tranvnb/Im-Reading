@@ -1,7 +1,7 @@
 {
-    "name": "new-tab-page",
+    "name": "i-am-reading",
+    "description": "Store and Restore halfway reading tabs",
     "version": "1.0.0",
-    "description": "A Vue.js web extension",
     "author": "James Hibbard <1940994+jameshibbard@users.noreply.github.com>",
     "license": "MIT",
     "scripts": {
@@ -13,6 +13,8 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "bootstrap": "^4.3.1",
+        "bootstrap-vue": "^2.0.2",
         "vue": "^2.6.10",
         "vue-awesome": "^3.2.0"
     },
