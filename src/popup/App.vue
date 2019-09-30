@@ -88,7 +88,6 @@ export default {
 
 <style lang="scss">
 @import 'node_modules/bootstrap/scss/bootstrap';
-// @import 'node_modules/bootstrap-vue/src/index.scss';
 body {
 	margin: 0px;
 	width: 110px;
