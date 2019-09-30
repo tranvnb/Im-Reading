@@ -4,8 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
-const { VueLoaderPlugin } = require('vue-loader');
-const { version } = require('./package.json');
+const {
+    VueLoaderPlugin
+} = require('vue-loader');
+const {
+    version
+} = require('./package.json');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var debug = process.env.NODE_ENV !== "production";
 
 const config = {
     mode: process.env.NODE_ENV,
@@ -21,6 +27,10 @@ const config = {
     },
     resolve: {
         extensions: ['.js', '.vue'],
+        alias: {
+            // If using the runtime only build
+            'vue$': 'vue/dist/vue.runtime.esm.js'
+        }
     },
     module: {
         rules: [{
@@ -58,9 +68,16 @@ const config = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
-        new CopyWebpackPlugin([
-            { from: 'assets', to: 'assets', ignore: ['icon.xcf'] },
-            { from: 'popup/popup.html', to: 'popup/popup.html', transform: transformHtml },
+        new CopyWebpackPlugin([{
+                from: 'assets',
+                to: 'assets',
+                ignore: ['icon.xcf']
+            },
+            {
+                from: 'popup/popup.html',
+                to: 'popup/popup.html',
+                transform: transformHtml
+            },
             // { from: 'tab/tab.html', to: 'tab/tab.html', transform: transformHtml },
             {
                 from: 'manifest.json',
@@ -90,6 +107,27 @@ if (config.mode === 'production') {
                 NODE_ENV: '"production"',
             },
         }),
+        new UglifyJSPlugin({
+            uglifyOptions: {
+                compress: {
+                    drop_console: true,
+                },
+                output: {
+                    comments: false,
+                },
+            },
+            warningsFilter: (warning, source) => {
+                if (/Dropping unreachable code/i.test(warning)) {
+                    return true;
+                }
+
+                if (/filename\.js/i.test(source)) {
+                    return true;
+                }
+
+                return false;
+            },
+        })
     ]);
 }
 
