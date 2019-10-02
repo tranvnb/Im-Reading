@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const {
     VueLoaderPlugin
 } = require('vue-loader');
@@ -44,11 +45,11 @@ const config = {
             },
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
                 test: /\.sass$/,
@@ -68,6 +69,7 @@ const config = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
+        new OptimizeCSSPlugin({}),
         new CopyWebpackPlugin([{
                 from: 'assets',
                 to: 'assets',
