@@ -1,6 +1,6 @@
 {
     "name": "I'm Reading",
-    "description": "Store and Restore halfway reading tabs",
+    "description": "Save and restore your reading tabs across PCs.",
     "version": 0.1,
     "manifest_version": 2,
     "browser_action": {
